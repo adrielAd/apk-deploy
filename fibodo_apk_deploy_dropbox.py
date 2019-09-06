@@ -8,28 +8,28 @@ import re
 
 def upload_file(accesstoken, file_from, file_to):
 
-    dbx = dropbox.Dropbox(accesstoken)
-    
-        for root, dirs, files in os.walk(file_from):
+	dbx = dropbox.Dropbox(accesstoken)
+	
+	for root, dirs, files in os.walk(file_from):
 
-            for filename in files:
-                # construct the full local path
-                local_path = os.path.join(root, filename)
+			for filename in files:
+				# construct the full local path
+				local_path = os.path.join(root, filename)
 
-                # construct the full Dropbox path
-                relative_path = os.path.relpath(local_path, file_from)
-                dropbox_path = os.path.join(file_to, relative_path)
-                print(dropbox_path)
-                head, tail = os.path.split(dropbox_path)
-                print(head)
-                try:
-                        dbx.files_create_folder(head, False)
-                        print("created "+ head + " on dropbox")
-                except Exception as e:
-                        print("could not create dir with name", head)
-                #upload the file
-                with open(local_path, 'rb') as f:
-                    dbx.files_upload(f.read(), dropbox_path, mode=dropbox.files.WriteMode.overwrite)
+				# construct the full Dropbox path
+				relative_path = os.path.relpath(local_path, file_from)
+				dropbox_path = os.path.join(file_to, relative_path)
+				print(dropbox_path)
+				head, tail = os.path.split(dropbox_path)
+				print(head)
+				try:
+						dbx.files_create_folder(head, False)
+						print("created "+ head + " on dropbox")
+				except Exception as e:
+						print("could not create dir with name", head)
+				#upload the file
+				with open(local_path, 'rb') as f:
+					dbx.files_upload(f.read(), dropbox_path, mode=dropbox.files.WriteMode.overwrite)
 
 
 parser = argparse.ArgumentParser()
