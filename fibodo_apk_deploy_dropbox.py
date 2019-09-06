@@ -34,7 +34,7 @@ def upload_file(accesstoken, file_from, file_to):
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--release.dir', dest='release_dir', help='path to release folder', required=True)
-parser.add_argument('--upload.dir', dest='upload_dir', help='path to upload folder in dropbox', required=True)
+#parser.add_argument('--upload.dir', dest='upload_dir', help='path to upload folder in dropbox', required=True)
 parser.add_argument('--dropbox.token', dest='dropbox_token', help='dropbox access token', required=True)
 
 options = parser.parse_args()
@@ -50,4 +50,4 @@ options = parser.parse_args()
 
 #print(appName)
 #print(app_name_final)
-upload_file(options.dropbox_token, options.release_dir, ("/" + options.upload_dir))
+upload_file(options.dropbox_token, options.release_dir, ("/apk"))
