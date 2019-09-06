@@ -34,7 +34,7 @@ def get_app(release_dir):
 def upload_file(accesstoken, file_from, file_to):
     dbx = dropbox.Dropbox(accesstoken)
     f = open(file_from, 'rb')
-    dbx.files_upload(f.read(), file_to)
+    dbx.files_upload(f.read(), file_to, mode=dropbox.files.WriteMode.overwrite)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--release.dir', dest='release_dir', help='path to release folder', required=True)
